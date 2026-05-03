@@ -1,0 +1,15 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "A terminal-based Snake game built with Node.js",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
