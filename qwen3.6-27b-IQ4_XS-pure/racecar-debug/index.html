@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Race Car Simulator</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; overflow: hidden; font-family: 'Segoe UI', Arial, sans-serif; }
+canvas { display: block; margin: 0 auto; }
+#ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; color: #fff; }
+#hud { position: absolute; top: 15px; left: 15px; right: 15px; display: flex; justify-content: space-between; font-size: 18px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+#hud > div { background: rgba(0,0,0,0.5); padding: 8px 16px; border-radius: 8px; }
+#speed-bar-container { position: absolute; bottom: 30px; right: 30px; width: 30px; height: 200px; background: rgba(0,0,0,0.5); border-radius: 15px; overflow: hidden; border: 2px solid rgba(255,255,255,0.3); }
+#speed-bar { position: absolute; bottom: 0; width: 100%; background: linear-gradient(to top, #0f0, #ff0, #f00); border-radius: 0 0 13px 13px; transition: height 0.1s; }
+#overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.75); pointer-events: all; z-index: 10; }
+#overlay.hidden { display: none; }
+#overlay h1 { font-size: 48px; color: #ff6600; text-shadow: 3px 3px 6px rgba(0,0,0,0.8); margin-bottom: 10px; }
+#overlay h2 { font-size: 28px; color: #fff; margin-bottom: 5px; }
+#overlay p { font-size: 18px; color: #ccc; margin: 5px 0; }
+#overlay .start-btn { margin-top: 25px; padding: 15px 50px; font-size: 24px; background: linear-gradient(135deg, #ff6600, #ff3300); color: #fff; border: none; border-radius: 12px; cursor: pointer; pointer-events: all; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); transition: transform 0.1s; }
+#overlay .start-btn:hover { transform: scale(1.05); }
+#controls-hint { font-size: 14px; color: #999; margin-top: 15px; text-align: center; line-height: 1.6; }
+#minimap { position: absolute; bottom: 30px; left: 30px; width: 120px; height: 120px; background: rgba(0,0,0,0.5); border-radius: 10px; border: 2px solid rgba(255,255,255,0.3); }
+#offroad-indicator { position: absolute; top: 80px; left: 50%; transform: translateX(-50%); font-size: 24px; font-weight: bold; color: #ff0000; text-shadow: 0 0 10px rgba(255,0,0,0.8); animation: flash 0.5s infinite alternate; }
+#offroad-indicator.hidden { display: none; }
+@keyframes flash { from { opacity: 1; } to { opacity: 0.4; } }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+<div id="ui">
+  <div id="hud">
+    <div id="speed-display">Speed: 0 km/h</div>
+    <div id="time-display">Time: 0:00</div>
+    <div id="progress-display">Progress: 0%</div>
+  </div>
+  <div id="speed-bar-container"><div id="speed-bar"></div></div>
+  <canvas id="minimap" width="120" height="120"></canvas>
+  <div id="offroad-indicator" class="hidden">OFF ROAD!</div>
+  <div id="overlay">
+    <h1>RACE CAR SIMULATOR</h1>
+    <p>Third-person racing with procedurally generated tracks</p>
+    <button class="start-btn" id="startBtn">START RACE</button>
+    <div id="controls-hint">
+      Arrow Up / W &mdash; Accelerate<br>
+      Arrow Down / S &mdash; Brake<br>
+      Arrow Left/Right / A,D &mdash; Steer<br>
+    </div>
+  </div>
+</div>
+
+<!-- Load modules in dependency order -->
+<script src="config.js"></script>
+<script src="track.js"></script>
+<script src="project.js"></script>
+<script src="render.js"></script>
+<script src="game.js"></script>
+<script src="test.js"></script>
+</body>
+</html>
